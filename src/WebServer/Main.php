@@ -162,7 +162,9 @@
             else
             {
 
-              $sender->sendMessage(TF::GREEN . "Successfully
+              $sender->sendMessage(TF::GREEN . "Stopped WebServer.");
+
+              $this->stop();
 
             }
 
