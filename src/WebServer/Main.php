@@ -117,6 +117,8 @@
 
           $sender->sendMessage(TF::RED . "Error: Not Enough Agrs. Usage: /webserver < start | stop >");
 
+          return true;
+
         }
         else
         {
