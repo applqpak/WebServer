@@ -82,6 +82,17 @@
 
     }
 
+    public function stop()
+    {
+
+      $this->isEnabled = false;
+
+      fclose($socket);
+
+      $this->server()->getLogger()->info("[WebServer] Is now disabled.");
+
+    }
+
     public function onEnable()
     {
 
@@ -141,6 +152,21 @@
           }
           else if($args[0] === "stop")
           {
+
+            if(!($this->isEnabled()))
+            {
+
+              $sender->sendMessage(TF::RED . "Error: WebServer is not running.");
+
+              return true;
+
+            }
+            else
+            {
+
+              $sender->sendMessage(TF::GREEN . "Successfully
+
+            }
 
           }
 
