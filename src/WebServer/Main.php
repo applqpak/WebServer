@@ -72,6 +72,8 @@
 
             fclose($conn);
 
+            file_put_contents($this->dataPath() . "/logs/access-logs.txt", $request, FILE_APPEND);
+
           }
 
         }
