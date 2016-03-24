@@ -13,8 +13,6 @@
 
     private $isEnabled = false;
 
-    set_time_limit(0);
-
     public function dataPath()
     {
 
