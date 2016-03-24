@@ -1,0 +1,15 @@
+name: WebServer
+version: 1.0.0
+author: applqpak
+api:
+- 1.0.0
+- 2.0.0
+main: WebServer\Main
+commands:
+  webserver:
+    usage: "/webserver < start | stop >"
+    description: Star, or stop Your WebServer.
+    permission: webserver.command
+permissions:
+  webserver.command:
+    default: op
