@@ -43,6 +43,11 @@
       else
       {
 
+        while($this->isEnabled)
+        {
+
+        }
+
       }
 
     }
@@ -78,7 +83,7 @@
           if($args[0] === "start")
           {
 
-            if($this->isEnabled === true)
+            if($this->isEnabled)
             {
 
               $sender->sendMessage(TF::RED . "Error: WebServer is already running.");
@@ -92,6 +97,10 @@
               $port = $this->cfg->get("server-port");
 
               $this->start("0.0.0.0", $port);
+
+              $sender->sendMessage(TF::GREEN . "WebServer was started.");
+
+              return true;
 
             }
 
