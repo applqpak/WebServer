@@ -87,6 +87,10 @@
             else
             {
 
+              $port = $this->cfg->get("server-port");
+
+              $this->start("0.0.0.0", $port);
+
             }
 
           }
