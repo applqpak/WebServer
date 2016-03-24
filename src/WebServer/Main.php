@@ -37,14 +37,42 @@
       if(!($socket))
       {
 
+        $this->isEnabled = false;
+
         $this->server()->getLogger()->info("[WebServer] Failed to start WebServer: " . $errstr . " - " . $errno);
 
       }
       else
       {
 
+        $this->server()->getLogger()->info("[WebServer] Is now running on 0.0.0.0 on port " . $port);
+
+        $directory = $this->cfg->get("html-directory");
+
+        $file_contents = @file_get_contents($this->dataPath() . $directory);
+
         while($this->isEnabled)
         {
+
+          while($conn = @stream_socket_accept($socket))
+          {
+
+            $request = "";
+
+            while(substr($request, -4) !== "\r\n\r\n")
+            {
+
+              $request .= fread($conn, 1024);
+
+            }
+
+            $headers = "HTTP/1.1 200 OK\r\nServer: PHP " . phpversion() . "\r\nContent-Type: text/html\r\n\r\n";
+
+            fwrite($conn, $headers . $file_contents);
+
+            fclose($conn);
+
+          }
 
         }
 
@@ -58,6 +86,8 @@
       @mkdir($this->dataPath());
 
       @mkdir($this->dataPath() . "/html/");
+
+      @mkdir($this->dataPath() . "/logs/");
 
       $this->cfg = new Config($this->dataPath() . "config.yml", Config::YAML, array("server-port" => 80, "html-directory" => "/html/"));
 
@@ -93,6 +123,8 @@
             }
             else
             {
+
+              $this->isEnabled = true;
 
               $port = $this->cfg->get("server-port");
 
