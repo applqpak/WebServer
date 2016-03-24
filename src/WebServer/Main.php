@@ -27,6 +27,24 @@
 
     }
 
+    public function start($bindToIP, $port)
+    {
+
+      $socket = @stream_socket_server("tcp://" . $bindToIP . ":" . $port, $errno, $errstr);
+
+      if(!($socket))
+      {
+
+        $this->server()->getLogger()->info("[WebServer] Failed to start WebServer: " . $errstr . " - " . $errno);
+
+      }
+      else
+      {
+
+      }
+
+    }
+
     public function onEnable()
     {
 
@@ -57,6 +75,19 @@
 
           if($args[0] === "start")
           {
+
+            if($this->isEnabled === true)
+            {
+
+              $sender->sendMessage(TF::RED . "Error: WebServer is already running.");
+
+              return true;
+
+            }
+            else
+            {
+
+            }
 
           }
           else if($args[0] === "stop")
