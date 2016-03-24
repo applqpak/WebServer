@@ -55,6 +55,15 @@
         else
         {
 
+          if($args[0] === "start")
+          {
+
+          }
+          else if($args[0] === "stop")
+          {
+
+          }
+
         }
 
       }
